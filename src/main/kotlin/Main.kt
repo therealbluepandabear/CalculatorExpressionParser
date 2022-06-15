@@ -22,24 +22,37 @@ private fun parseExpression(expression: String) {
             }
         }
 
-        if (char == '+') {
+        if (char == '-' || char == '+') {
             if (exprList.isEmpty() && curLeftHandNumber != "" && curOpr == ' ' && curRightHandNumber == "") {
-                curOpr = '+'
+                curOpr = char
             } else if (exprList.isEmpty() && curLeftHandNumber != "" && curRightHandNumber != "" && curOpr !=             ' ') {
                 exprList.add(MathExpr(curLeftHandNumber.toInt(), curOpr, curRightHandNumber.toInt()))
                 curRightHandNumber = ""
-                curOpr = '+'
-                curLeftHandNumber = (exprList.first().leftHandNumber + exprList.first().rightHandNumber).toString()
+                curOpr = char
+                curLeftHandNumber = if (char == '-' ) {
+                    (exprList.first().leftHandNumber - exprList.first().rightHandNumber).toString()
+                } else {
+                    (exprList.first().leftHandNumber + exprList.first().rightHandNumber).toString()
+                }
             } else {
                 exprList.add(MathExpr(curLeftHandNumber.toInt(), curOpr, curRightHandNumber.toInt()))
-                curLeftHandNumber = (exprList[exprList.size - 1].leftHandNumber + exprList[exprList.size - 1].rightHandNumber).toString()
-                curOpr = '+'
+                curLeftHandNumber = if (curOpr == '-' ) {
+                    (exprList[exprList.size - 1].leftHandNumber - exprList[exprList.size - 1].rightHandNumber).toString()
+                } else {
+                    (exprList[exprList.size - 1].leftHandNumber + exprList[exprList.size - 1].rightHandNumber).toString()
+                }
+
+                curOpr = char
                 curRightHandNumber = ""
             }
         }
 
-        if (index == expression.length-1 ) {
-            val result = curLeftHandNumber.toInt() + curRightHandNumber.toInt()
+        if (index == expression.length - 1) {
+            val result = if (curOpr == '-') {
+                curLeftHandNumber.toInt() - curRightHandNumber.toInt()
+            } else {
+                curLeftHandNumber.toInt() + curRightHandNumber.toInt()
+            }
             curLeftHandNumber = result.toString()
         }
     }
@@ -49,5 +62,5 @@ private fun parseExpression(expression: String) {
 
 
 fun main() {
-    parseExpression("500+354+23+1+55+999+798+22")
+    parseExpression("1000+33+3+1-99-1000-93983489-23991+1122+3+111+294-8")
 }
