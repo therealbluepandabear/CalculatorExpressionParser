@@ -1,4 +1,3 @@
-
 data class MathExpr(val leftHandNumber: Int,
                     val opr: Char,
                     val rightHandNumber: Int)
@@ -29,14 +28,14 @@ private fun parseExpression(expression: String) {
                 exprList.add(MathExpr(curLeftHandNumber.toInt(), curOpr, curRightHandNumber.toInt()))
                 curRightHandNumber = ""
                 curOpr = char
-                curLeftHandNumber = if (char == '-' ) {
+                curLeftHandNumber = if (exprList.first().opr == '-' ) {
                     (exprList.first().leftHandNumber - exprList.first().rightHandNumber).toString()
                 } else {
                     (exprList.first().leftHandNumber + exprList.first().rightHandNumber).toString()
                 }
             } else {
                 exprList.add(MathExpr(curLeftHandNumber.toInt(), curOpr, curRightHandNumber.toInt()))
-                curLeftHandNumber = if (curOpr == '-' ) {
+                curLeftHandNumber = if (exprList[exprList.size - 1].opr == '-' ) {
                     (exprList[exprList.size - 1].leftHandNumber - exprList[exprList.size - 1].rightHandNumber).toString()
                 } else {
                     (exprList[exprList.size - 1].leftHandNumber + exprList[exprList.size - 1].rightHandNumber).toString()
@@ -45,6 +44,9 @@ private fun parseExpression(expression: String) {
                 curOpr = char
                 curRightHandNumber = ""
             }
+                println(curLeftHandNumber) // result
+                println(exprList)
+
         }
 
         if (index == expression.length - 1) {
@@ -54,10 +56,11 @@ private fun parseExpression(expression: String) {
                 curLeftHandNumber.toInt() + curRightHandNumber.toInt()
             }
             curLeftHandNumber = result.toString()
+            println(curRightHandNumber)
         }
     }
 
-    println(curLeftHandNumber) // result
+    println("result" + curLeftHandNumber) // result
 }
 
 
