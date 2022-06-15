@@ -11,21 +11,21 @@ private fun parseExpression(expression: String) {
 
     for ((index, char) in expression.toCharArray().withIndex()) {
         if (exprList.isEmpty()) {
-            if (char.isDigit() &&  curOpr == ' ' && curRightHandNumber == "") {
+            if (char.isDigit() &&  curOpr == ' ') {
                 curLeftHandNumber += char
             } else if (char.isDigit() && curOpr != ' ') {
                 curRightHandNumber += char
             }
         } else {
-            if (char.isDigit() && curLeftHandNumber != "" && curOpr != ' ') {
+            if (char.isDigit() && curLeftHandNumber != "") {
                 curRightHandNumber += char
             }
         }
 
         if (char == '-' || char == '+') {
-            if (exprList.isEmpty() && curLeftHandNumber != "" && curOpr == ' ' && curRightHandNumber == "") {
+            if (exprList.isEmpty() && curLeftHandNumber != "" && curOpr == ' ') {
                 curOpr = char
-            } else if (exprList.isEmpty() && curLeftHandNumber != "" && curRightHandNumber != "" && curOpr !=             ' ') {
+            } else if (exprList.isEmpty() && curLeftHandNumber != "" && curRightHandNumber != "") {
                 exprList.add(MathExpr(curLeftHandNumber.toInt(), curOpr, curRightHandNumber.toInt()))
                 curRightHandNumber = ""
                 curOpr = char
