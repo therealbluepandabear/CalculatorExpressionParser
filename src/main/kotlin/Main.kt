@@ -7,9 +7,7 @@ private fun parseExpression(expression: String) {
     var curLeftHandNumber = ""
     var curOpr = ' '
     var curRightHandNumber = ""
-    var exprList = mutableListOf<MathExpr>()
-
-    var sum = 0
+    val exprList = mutableListOf<MathExpr>()
 
     for ((index, char) in expression.toCharArray().withIndex()) {
         if (exprList.isEmpty()) {
@@ -41,7 +39,7 @@ private fun parseExpression(expression: String) {
         }
 
         if (index == expression.length-1 ) {
-            var result = curLeftHandNumber.toInt() + curRightHandNumber.toInt()
+            val result = curLeftHandNumber.toInt() + curRightHandNumber.toInt()
             curLeftHandNumber = result.toString()
         }
     }
