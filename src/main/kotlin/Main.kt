@@ -61,24 +61,7 @@ private fun parseExpression(expression: String) {
         }
 
         if (index == expression.length - 1) {
-            val result = when (curOpr) {
-                '-' -> {
-                    curLeftHandNumber.toInt() - curRightHandNumber.toInt()
-                }
-
-                '+' -> {
-                    curLeftHandNumber.toInt() + curRightHandNumber.toInt()
-                }
-
-                '*' -> {
-                    curLeftHandNumber.toInt() * curRightHandNumber.toInt()
-                }
-
-                else -> {
-                    curLeftHandNumber.toInt() / curRightHandNumber.toInt()
-                }
-            }
-
+            val result = MathExpr(curLeftHandNumber.toInt(), curOpr, curRightHandNumber.toInt()).compute()
             curLeftHandNumber = result.toString()
         }
     }
@@ -88,5 +71,5 @@ private fun parseExpression(expression: String) {
 
 
 fun main() {
-    parseExpression("5*5+5*5*5+5+5")
+    parseExpression("100+43+323-2343+343+3232-23243+2342302-2")
 }
