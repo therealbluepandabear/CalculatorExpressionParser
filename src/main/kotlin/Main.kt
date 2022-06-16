@@ -1,13 +1,6 @@
 data class MathExpr(val leftHandNumber: Int,
                     val opr: Char,
                     val rightHandNumber: Int) {
-    var precedence = 0
-
-    init {
-        if (opr == '*') {
-            precedence = 1
-        }
-    }
 
     fun compute(): Int {
         return when (opr) {
@@ -95,5 +88,5 @@ private fun parseExpression(expression: String) {
 
 
 fun main() {
-    parseExpression("5*5*5*5/5")
+    parseExpression("5*5+5*5*5+5+5")
 }
